@@ -13,8 +13,8 @@ class App extends React.Component{
   };
 
   search_book_string = () => {
-    const {inp} = this.state;
-    console.log('Taken ', inp);
+    const {input} = this.state;
+    console.log('Taken ', input);
   };
 
   inputChange = event => {
@@ -22,13 +22,13 @@ class App extends React.Component{
   };
 
   render() {
-  const { inp } = this.state;
+  const { input } = this.state;
 
   return (
     <div id = "search-block">
       <h1>Search for Books</h1>
       <p>
-        <input type = "text" name = "search-text" onChange = {this.inputChange} value = {inp}/>
+        <input type = "text" name = "search-text" onChange = {this.inputChange} value = {input}/>
         <button onClick = {this.search_book_string}>Search</button>
       </p>
       <button onClick = {() => Search_Book.increment()}>+</button>
