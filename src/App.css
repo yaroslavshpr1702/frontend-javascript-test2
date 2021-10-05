@@ -13,10 +13,18 @@ h1 {
 
 #search-block {
   position: relative;
-  width: 450px;
+  min-width: 320px;
+  max-width: 460px;
   margin-left: auto;
   margin-right: auto;
 }
 input {
-  width: 400px;
+  width: 90%;
+}
+select {
+  width: 100px;
+}
+
+input, select {
+  margin: 10px;
 }
