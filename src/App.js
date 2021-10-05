@@ -1,36 +1,18 @@
-//import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import Search_Book from './store/observbl';
+import SearchInput from './components/SearchInput';
 import { observer } from 'mobx-react';
 
 //const App = observer(() => {
 class App extends React.Component{
 
-  constructor(props) {
-    super(props);
-    this.state = { input: '' };
-  };
-
-  search_book_string = () => {
-    const {input} = this.state;
-    console.log('Taken ', input);
-  };
-
-  inputChange = event => {
-    this.setState({ input: event.target.value})
-  };
-
   render() {
-  const { input } = this.state;
 
   return (
     <div id = "search-block">
       <h1>Search for Books</h1>
-      <p>
-        <input type = "text" name = "search-text" onChange = {this.inputChange} value = {input}/>
-        <button onClick = {this.search_book_string}>Search</button>
-      </p>
+      <SearchInput />
       <button onClick = {() => Search_Book.increment()}>+</button>
       <button onClick = {() => Search_Book.decrement()}>-</button>
       {"count = " + Search_Book.count}
