@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {makeObservable, makeAutoObservable, observable} from 'mobx';
+import {makeAutoObservable, observable} from 'mobx';
 
 class Search_Book {
     count = 0;
@@ -23,7 +23,6 @@ class Search_Book {
         var search_string = searched_book;
         console.log('Taken ', searched_book);
         console.log('Found ', search_string);
-        //console.log('Book ', this.book);
     }
 }
 

@@ -5,7 +5,8 @@ import SearchInput from './components/SearchInput';
 import { observer } from 'mobx-react';
 
 //const App = observer(() => {
-class App extends React.Component{
+class App extends React.Component {
+
 
   render() {
 
