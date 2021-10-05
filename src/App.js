@@ -4,14 +4,32 @@ import React from 'react';
 import Search_Book from './store/observbl';
 import { observer } from 'mobx-react';
 
-//function App()
-const App = observer(() => {
+//const App = observer(() => {
+class App extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state = { input: '' };
+  };
+
+  search_book_string = () => {
+    const {inp} = this.state;
+    console.log('Taken ', inp);
+  };
+
+  inputChange = event => {
+    this.setState({ input: event.target.value})
+  };
+
+  render() {
+  const { inp } = this.state;
+
   return (
     <div id = "search-block">
       <h1>Search for Books</h1>
       <p>
-        <input type = "text" name = "search-text"/>
-        <button onClick = {() => Search_Book.search_this('Привет')}>Search</button>
+        <input type = "text" name = "search-text" onChange = {this.inputChange} value = {inp}/>
+        <button onClick = {this.search_book_string}>Search</button>
       </p>
       <button onClick = {() => Search_Book.increment()}>+</button>
       <button onClick = {() => Search_Book.decrement()}>-</button>
@@ -35,6 +53,7 @@ const App = observer(() => {
       </p>
     </div>
   );
-})
+  }
+}
 
-export default App;
+export default observer(App);
