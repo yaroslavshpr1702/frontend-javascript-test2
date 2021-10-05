@@ -1,13 +1,23 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import React from 'react'
+import React from 'react';
+import Search_Book from './store/observbl';
+import { observer } from 'mobx-react';
 
-function App() {
+//function App()
+const App = observer(() => {
   return (
     <div id = "search-block">
       <h1>Search for Books</h1>
       <p>
-        <input type = "text" name = "search-text"></input>
+        <input type = "text" name = "search-text"/>
+        <button onClick = {() => Search_Book.search_this('Привет')}>Search</button>
+        
+      </p>
+      <button onClick = {() => Search_Book.increment()}>+</button>
+      <button onClick = {() => Search_Book.decrement()}>-</button>
+      {"count = " + Search_Book.count}
+      <p>
         Categories
         <select name = "search-categories">
           <option selected value="all">all</option>
@@ -26,6 +36,6 @@ function App() {
       </p>
     </div>
   );
-}
+})
 
 export default App;
