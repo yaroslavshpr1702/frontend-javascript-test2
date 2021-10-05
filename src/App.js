@@ -12,7 +12,6 @@ const App = observer(() => {
       <p>
         <input type = "text" name = "search-text"/>
         <button onClick = {() => Search_Book.search_this('Привет')}>Search</button>
-        
       </p>
       <button onClick = {() => Search_Book.increment()}>+</button>
       <button onClick = {() => Search_Book.decrement()}>-</button>

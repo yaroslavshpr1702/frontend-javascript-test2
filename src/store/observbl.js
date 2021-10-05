@@ -1,10 +1,9 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {makeObservable, makeAutoObservable, observable, decorate, action, computed} from 'mobx';
+import {makeObservable, makeAutoObservable, observable} from 'mobx';
 
 class Search_Book {
-    
-    count = 0
+    count = 0;
     constructor() {
         makeAutoObservable(this);
         //this.search_string = React.createRef();
@@ -21,8 +20,11 @@ class Search_Book {
     }
 
     search_this(searched_book) {
-        console.log('Found ', searched_book);
+        var search_string = searched_book;
+        console.log('Taken ', searched_book);
+        console.log('Found ', search_string);
+        //console.log('Book ', this.book);
     }
 }
 
-export default new Search_Book()
+export default new Search_Book();
