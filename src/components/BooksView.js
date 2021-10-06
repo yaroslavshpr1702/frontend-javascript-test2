@@ -5,65 +5,44 @@ class BooksView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: false,
             totalBooks: 0,
             books: []
         };
     }
 
-    giveItems() {
+    componentDidMount() {
         fetch("https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes")
-        .then(res => res.json())
+        .then(response => response.json())
         .then(
-            (result) => {
-            this.setState({
-                    isLoaded: true,
-                    totalBooks: result.totalItems,
-                    books: result.items
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: true
-                });
-            }
+            data => this.setState({
+                totalBooks: data.totalItems,
+                books: data.items
+            })
         );
     }
 
     render() {
-    const {error, totalBooks, isLoaded, books} = this.state;
-    if (error) {
-        return (
-            <div id = "view-block">
-                <p>Error {error.message}</p>
-            </div>)
-    } else if(!isLoaded) {
-        return (
-            <div id = "view-block">
-                <p>
-                    {totalBooks}<br/>
-                    Loading...
-                </p>
-            </div>
-        )
-    } else {
+    const {totalBooks, books} = this.state;
         return(
             <div id = "view-block">
-                <p>Found {totalBooks} results</p>
-                <ul>
-                    {books.map(item => {
-                        <li key={item.name}>
-                            {item.volumeInfo.title}
-                        </li>
-                    })}
-                </ul>
+                <p id = "view-block-p-results">Found {totalBooks} results</p>
+                <div id = "view-block-books">
+                    {books.map(item => (
+                        <div className = "book-panel">
+                            <img src={item.volumeInfo.imageLinks.smallThumbnail}/>
+                            <p className = "book-category">
+                                {item.volumeInfo.categories}
+                            </p>
+                            <h2>{item.volumeInfo.title}</h2>
+                            <p className = "book-author">
+                                {item.volumeInfo.authors}
+                            </p>
+                        </div>
+                    )
+                    )}
+                </div>
             </div>
         );
-    }
-
-
     }
 }
 
