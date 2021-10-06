@@ -7,30 +7,33 @@ class BooksView extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
-        }
+            totalBooks: 0,
+            books: []
+        };
     }
 
-    giveItems(search_books_string) {
-        fetch(search_books_string)
+    giveItems() {
+        fetch("https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes")
         .then(res => res.json())
         .then(
             (result) => {
             this.setState({
-                    items: result.items
+                    isLoaded: true,
+                    totalBooks: result.totalItems,
+                    books: result.items
                 });
             },
             (error) => {
-                this.State({
+                this.setState({
                     isLoaded: true,
-                    error
+                    error: true
                 });
             }
-        )
+        );
     }
 
     render() {
-    const {error, isLoaded, items} = this.state;
+    const {error, totalBooks, isLoaded, books} = this.state;
     if (error) {
         return (
             <div id = "view-block">
@@ -39,13 +42,23 @@ class BooksView extends React.Component {
     } else if(!isLoaded) {
         return (
             <div id = "view-block">
-                <p>Loading...</p>
+                <p>
+                    {totalBooks}<br/>
+                    Loading...
+                </p>
             </div>
         )
     } else {
         return(
             <div id = "view-block">
-
+                <p>Found {totalBooks} results</p>
+                <ul>
+                    {books.map(item => {
+                        <li key={item.name}>
+                            {item.volumeInfo.title}
+                        </li>
+                    })}
+                </ul>
             </div>
         );
     }

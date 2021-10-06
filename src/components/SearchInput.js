@@ -14,7 +14,7 @@ class SearchInput extends React.Component {
         var search_query = "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes";
 
         console.log('Search ', search_query);
-        BooksView.giveItems(search_query);
+        //BooksView.giveItems(search_query);
       };
       onKeyPressHandler = event => {
           if (event.key === 'Enter') {
