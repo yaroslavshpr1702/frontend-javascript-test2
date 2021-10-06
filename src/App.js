@@ -6,8 +6,6 @@ import { observer } from 'mobx-react';
 
 //const App = observer(() => {
 class App extends React.Component {
-
-
   render() {
 
   return (

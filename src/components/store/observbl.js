@@ -1,12 +1,13 @@
-//import React from 'react';
-//import {observer} from 'mobx-react';
-import {makeAutoObservable, observable} from 'mobx';
+import {makeAutoObservable} from 'mobx';
 
 class Search_Book {
     count = 0;
+
+    search_str = '';
+    search_category = '';
+    search_sort = '';
     constructor() {
         makeAutoObservable(this);
-        //this.search_string = React.createRef();
     }
 
     increment() {
@@ -20,9 +21,8 @@ class Search_Book {
     }
 
     search_this(searched_book) {
-        var search_string = searched_book;
-        console.log('Taken ', searched_book);
-        console.log('Found ', search_string);
+        this.search_str = searched_book;
+        console.log('FoundSB ', this.search_str);
     }
 }
 
