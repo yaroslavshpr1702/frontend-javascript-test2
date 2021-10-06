@@ -1,4 +1,5 @@
 import React from 'react';
+import BooksView from './BooksView';
 
 class SearchInput extends React.Component {
     constructor(props) {
@@ -6,10 +7,14 @@ class SearchInput extends React.Component {
         this.state = { input: '' };
         this.onKeyPressHandler = this.onKeyPressHandler
       };
-    
+      
       search_book_string = () => {
         const {input} = this.state;
         console.log('Taken ', input);
+        var search_query = "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes";
+
+        console.log('Search ', search_query);
+        BooksView.giveItems(search_query);
       };
       onKeyPressHandler = event => {
           if (event.key === 'Enter') {
