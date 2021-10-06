@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import BooksView from './BooksView';
 import Search_Book from './store/observbl';
 
@@ -15,13 +16,13 @@ class SearchInput extends React.Component {
         var search_query = "https://www.googleapis.com/books/v1/volumes?q=" + input + "+inauthor:keyes";
         console.log('Search ', search_query);
 
-        //BooksView.searchBook = search_query;
-        //console.log('BooksView ', BooksView.searchBook);
+        
+
+        Search_Book.search_this(search_query);
       };
       onKeyPressHandler = event => {
           if (event.key === 'Enter') {
-            const {input} = this.state;
-            this.search_book_string(input);
+            this.search_book_string();
           };
       }
     
@@ -44,7 +45,7 @@ class SearchInput extends React.Component {
           {"count = " + Search_Book.count}
           <p>
             Categories
-            <select name = "search-categories">
+            <select name = "search-categories" ref = "select-cat">
               <option selected value="all">all</option>
               <option value = "art">art</option>
               <option value = "biography">biography</option>
@@ -54,7 +55,7 @@ class SearchInput extends React.Component {
               <option value = "poetry">poetry</option>
             </select>
             Sorting By
-            <select name = "search-sorting">
+            <select name = "search-sorting" ref = "select-sort">
               <option selected value = "revelance">revelance</option>
               <option value = "newest">newest</option>
             </select>
@@ -66,4 +67,4 @@ class SearchInput extends React.Component {
       }
 }
 
-export default SearchInput;
+export default observer(SearchInput);
