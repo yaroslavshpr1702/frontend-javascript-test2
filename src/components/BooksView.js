@@ -6,8 +6,15 @@ class BooksView extends React.Component {
         super(props);
         this.state = {
             totalBooks: 0,
-            books: []
+            books: [],
+            searchBook: 'ya'
         };
+        this.takeSearchString = this.takeSearchString.bind(this);
+    };
+
+    takeSearchString = (strng) => {
+        this.setState({searchBook: strng});
+        console.log('I take it! ', strng);
     }
 
     componentDidMount() {
@@ -19,13 +26,24 @@ class BooksView extends React.Component {
                 books: data.items
             })
         );
+    };
+
+    componentDidUpdate(strng) {
+        fetch(strng)
+        .then(response => response.json())
+        .then(
+            data => this.setState({
+                totalBooks: data.totalItems,
+                books: data.items
+            })
+        );
     }
 
     render() {
-    const {totalBooks, books} = this.state;
+    const {totalBooks, books, searchBook} = this.state;
         return(
             <div id = "view-block">
-                <p id = "view-block-p-results">Found {totalBooks} results</p>
+                <p id = "view-block-p-results">Found {totalBooks} results{this.takeSearchString}</p>
                 <div id = "view-block-books">
                     {books.map(item => (
                         <div className = "book-panel">
@@ -43,7 +61,7 @@ class BooksView extends React.Component {
                 </div>
             </div>
         );
-    }
+    };
 }
 
 export default observer(BooksView);
