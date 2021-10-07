@@ -27,30 +27,19 @@ class BooksView extends React.Component {
         );
     };
 
-    componentDidUpdate(prevProps) {
+    buttonClick() {
         console.log('Something changed!\n-', Search_Book.search_str);
-        console.log('this.props.books - ', this.props.books);
-        console.log('prevProps.books - ', prevProps.books);
-        console.log('isBtnClicked - ', this.isBtnClicked);
-        if (this.props.books !== prevProps.books)
-        {
-            fetch(Search_Book.search_str)
+        this.setState({isLoaded: false});
+        fetch(Search_Book.search_str)
             .then(response => response.json())
             .then(
             data => this.setState({
                 totalBooks: data.totalItems,
                 books: data.items,
-                isLoaded: true,
-                isBtnClicked: false
+                isLoaded: true
             })
-        );
-        }
-        
-    }
-
-    buttonClick() {
-        this.setState({isBtnClicked: true});
-        console.log('isBtnClicked - ', this.isBtnClicked);
+        )
+        console.log('Updated');
     }
 
     render() {
@@ -67,7 +56,7 @@ class BooksView extends React.Component {
         return(
                     <div id = "view-block">
                         <p id = "view-block-p-results">Found {totalBooks} results</p> 
-                        <button onClick = {this.buttonClick}>Take it!</button>
+                        <button onClick = {this.buttonClick}>Update result</button>
                         <div id = "view-block-books">
                             {books.map(book => (
                                 <a key = {book.id} href = {book.volumeInfo.infoLink}>
