@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import BooksView from './BooksView';
 import Search_Book from './store/observbl';
 
 class SearchInput extends React.Component {

@@ -59,17 +59,25 @@ class BooksView extends React.Component {
                     <div id = "view-block">
                         <p id = "view-block-p-results">Found {totalBooks} results</p>
                         <div id = "view-block-books">
-                            {books.map(item => (
-                                <div className = "book-panel">
-                                    <img src={item.volumeInfo.imageLinks.smallThumbnail} alt="no img"/>
-                                    <p className = "book-category">
-                                        {item.volumeInfo.categories}
-                                    </p>
-                                    <h2><a href = "#">{item.volumeInfo.title}</a></h2>
-                                    <p className = "book-author">
-                                        {item.volumeInfo.authors}
-                                    </p>
-                                </div>
+                            {books.map(book => (
+                                <a key = {book.id} href = {book.volumeInfo.infoLink}>
+                                    <div className = "book-panel">
+                                        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="no img"/>
+                                        <p className = "book-category">
+                                            {book.volumeInfo.categories.map(category =>(
+                                                <span>{category}/</span>
+                                            )
+                                            )}
+                                        </p>
+                                        <h2>{book.volumeInfo.title}</h2>
+                                        <p className = "book-author">
+                                            {book.volumeInfo.authors.map(author => (
+                                                <span>{author}/</span>
+                                            )
+                                            )}
+                                        </p>
+                                    </div>
+                                </a>
                             )
                             )}
                         </div>
