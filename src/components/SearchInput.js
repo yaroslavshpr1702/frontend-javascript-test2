@@ -54,13 +54,10 @@ class SearchInput extends React.Component {
                 <input type = "text" name = "search-text" value = {input} onKeyPress = {this.onKeyPressHandler} onChange = {this.inputChange}/>
                 <button onClick = {this.search_book_string}>Search</button>
           </p>
-          <button onClick = {() => Search_Book.increment()}>+</button>
-          <button onClick = {() => Search_Book.decrement()}>-</button>
-          {"count = " + Search_Book.count}
           <p>
             Categories
             <select name = "search-categories" value = {selected_category} onChange = {e => this.takeCategoryValue(e.target.value)}>
-              <option selected value="all">all</option>
+              <option defaultValue value="all">all</option>
               <option value = "art">art</option>
               <option value = "biography">biography</option>
               <option value = "computers">computers</option>
@@ -70,7 +67,7 @@ class SearchInput extends React.Component {
             </select>
             Sorting By
             <select name = "search-sorting" value = {selected_sorting} onChange = {e => this.takeSortingValue(e.target.value)}>
-              <option selected value = "revelance">revelance</option>
+              <option defaultValue value = "revelance">revelance</option>
               <option value = "newest">newest</option>
             </select>
           </p>
