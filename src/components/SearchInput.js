@@ -39,11 +39,11 @@ class SearchInput extends React.Component {
       takeCategoryValue = e => {
         this.setState({selected_category: e});
         console.log('Category ', this.selected_category);
-      }
+      };
       takeSortingValue = e => {
         this.setState({selected_sorting: e});
         console.log('Sorting ', this.selected_sorting);
-      }
+      };
 
       render() {
         const { input, selected_category, selected_sorting } = this.state;

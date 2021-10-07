@@ -65,7 +65,7 @@ class BooksView extends React.Component {
                                     <p className = "book-category">
                                         {item.volumeInfo.categories}
                                     </p>
-                                    <h2>{item.volumeInfo.title}</h2>
+                                    <h2><a href = "#">{item.volumeInfo.title}</a></h2>
                                     <p className = "book-author">
                                         {item.volumeInfo.authors}
                                     </p>

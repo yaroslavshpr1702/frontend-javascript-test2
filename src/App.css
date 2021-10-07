@@ -21,6 +21,11 @@ h1, #search-block p {
 h2 {
   font-size: 16px;
 }
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
 .book-category {
   font-size: 12px;
   color: gray;
