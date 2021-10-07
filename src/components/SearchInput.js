@@ -6,19 +6,25 @@ import Search_Book from './store/observbl';
 class SearchInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { input: '' };
-        this.onKeyPressHandler = this.onKeyPressHandler
+        this.state = { 
+          input: '',
+          selected_category: 'all',
+          selected_sorting: 'revelance'
+        };
       };
       
       search_book_string = () => {
         const {input} = this.state;
-        console.log('Taken ', input);
+        console.log('Taken - ', input);
         var search_query = "https://www.googleapis.com/books/v1/volumes?q=" + input + "+inauthor:keyes";
-        console.log('Search ', search_query);
+        console.log('Search query - ', search_query);
 
-        
+        const {selected_category} = this.state;
+        const {selected_sorting} = this.state;
+        console.log('Category - ', selected_category);
+        console.log('Sorting - ', selected_sorting);
 
-        Search_Book.search_this(search_query);
+        Search_Book.search_this(search_query, selected_category, selected_sorting);
       };
       onKeyPressHandler = event => {
           if (event.key === 'Enter') {
@@ -30,8 +36,17 @@ class SearchInput extends React.Component {
         this.setState({ input: event.target.value})
       };
 
+      takeCategoryValue = e => {
+        this.setState({selected_category: e});
+        console.log('Category ', this.selected_category);
+      }
+      takeSortingValue = e => {
+        this.setState({selected_sorting: e});
+        console.log('Sorting ', this.selected_sorting);
+      }
+
       render() {
-        const { input } = this.state;
+        const { input, selected_category, selected_sorting } = this.state;
 
         return (
         <div id = "search-block">
@@ -45,7 +60,7 @@ class SearchInput extends React.Component {
           {"count = " + Search_Book.count}
           <p>
             Categories
-            <select name = "search-categories" ref = "select-cat">
+            <select name = "search-categories" value = {selected_category} onChange = {e => this.takeCategoryValue(e.target.value)}>
               <option selected value="all">all</option>
               <option value = "art">art</option>
               <option value = "biography">biography</option>
@@ -55,7 +70,7 @@ class SearchInput extends React.Component {
               <option value = "poetry">poetry</option>
             </select>
             Sorting By
-            <select name = "search-sorting" ref = "select-sort">
+            <select name = "search-sorting" value = {selected_sorting} onChange = {e => this.takeSortingValue(e.target.value)}>
               <option selected value = "revelance">revelance</option>
               <option value = "newest">newest</option>
             </select>

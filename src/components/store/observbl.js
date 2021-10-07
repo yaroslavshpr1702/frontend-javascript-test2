@@ -20,9 +20,11 @@ class Search_Book {
         console.log('dec', this.count);
     }
 
-    search_this(searched_book) {
+    search_this(searched_book, searched_category, searched_sorting) {
         this.search_str = searched_book;
-        console.log('FoundSB ', this.search_str);
+        this.search_category = searched_category;
+        this.search_sort = searched_sorting;
+        console.log('Found str - ', this.search_str, ',\ncat - ', this.search_category, ',\nsort - ', this.search_sort);
     }
 }
 

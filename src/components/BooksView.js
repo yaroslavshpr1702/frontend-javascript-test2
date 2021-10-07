@@ -22,7 +22,6 @@ class BooksView extends React.Component {
                 books: data.items,
                 isLoaded: true
             }),
-            
         );
     };
 
