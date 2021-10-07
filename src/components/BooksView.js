@@ -16,7 +16,7 @@ class BooksView extends React.Component {
 
     componentDidMount() {
         console.log('Start!');
-        fetch("https://www.googleapis.com/books/v1/volumes?q=c#+inauthor:keyes")
+        fetch("https://www.googleapis.com/books/v1/volumes?q=js+inauthor:keyes")
         .then(response => response.json())
         .then(
             data => this.setState({
@@ -72,9 +72,11 @@ class BooksView extends React.Component {
                             {books.map(book => (
                                 <a key = {book.id} href = {book.volumeInfo.infoLink}>
                                     <div className = "book-panel">
-                                        <img src = {
-                                            (book.volumeInfo.imageLinks)?book.volumeInfo.imageLinks.smallThumbnail:""
-                                            } alt="no img"/>
+                                        {
+                                            (book.volumeInfo.imageLinks)?
+                                            <img src = {book.volumeInfo.imageLinks.smallThumbnail} alt="no img"/>
+                                            :""
+                                        }
                                         <p className = "book-category">
                                             {(book.volumeInfo.categories)?book.volumeInfo.categories.map(category =>(
                                                 <span>{category}/</span>
@@ -96,8 +98,6 @@ class BooksView extends React.Component {
                     </div>
                 );
     }
-
-        
     };
 }
 

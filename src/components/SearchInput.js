@@ -72,8 +72,6 @@ class SearchInput extends React.Component {
             </select>
           </p>
         </div>
-            
-            
         )
       }
 }
