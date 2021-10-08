@@ -11,7 +11,11 @@ class App extends React.Component {
     this.state = {
       input: '',
       selected_category: 'all',
-      selected_sorting: 'revelance'
+      selected_sorting: 'revelance',
+      
+      totalBooks: 0,
+      books: [],
+      isLoaded: false
     };
   };
 
@@ -27,6 +31,19 @@ class App extends React.Component {
     console.log('Sorting - ', selected_sorting);
 
     Search_Book.search_this(search_query, selected_category, selected_sorting);
+
+    console.log('Something changed!\n-', Search_Book.search_str);
+    this.setState({isLoaded: false});
+    fetch(Search_Book.search_str)
+        .then(response => response.json())
+        .then(
+        data => this.setState({
+            totalBooks: data.totalItems,
+            books: data.items,
+            isLoaded: true
+        })
+    )
+    console.log('Updated');
   };
   onKeyPressHandler = event => {
       if (event.key === 'Enter') {
@@ -45,6 +62,18 @@ class App extends React.Component {
     console.log('Sorting ', this.selected_sorting);
   };
   
+  componentDidMount() {
+    console.log('Start!');
+    fetch("https://www.googleapis.com/books/v1/volumes?q=js+inauthor:keyes")
+    .then(response => response.json())
+    .then(
+        data => this.setState({
+            totalBooks: data.totalItems,
+            books: data.items,
+            isLoaded: true
+        }),
+    );
+  };
   render() {
 
   return (
@@ -60,7 +89,11 @@ class App extends React.Component {
         takeCategoryValue = {this.takeCategoryValue}
         takeSortingValue = {this.takeSortingValue}
       />
-      <BooksView />
+      <BooksView 
+        totalBooks = {this.state.totalBooks}
+        books = {this.state.books}
+        isLoaded = {this.state.isLoaded}
+      />
     </div>
   );
   }
