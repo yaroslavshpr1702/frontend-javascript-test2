@@ -1,62 +1,25 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import Search_Book from './store/observbl';
 
 class SearchInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-          input: '',
-          selected_category: 'all',
-          selected_sorting: 'revelance'
+        this.state = {
+
         };
-      };
-      
-      search_book_string = () => {
-        const {input} = this.state;
-        console.log('Taken - ', input);
-        var search_query = "https://www.googleapis.com/books/v1/volumes?q=" + input + "+inauthor:keyes";
-        console.log('Search query - ', search_query);
-
-        const {selected_category} = this.state;
-        const {selected_sorting} = this.state;
-        console.log('Category - ', selected_category);
-        console.log('Sorting - ', selected_sorting);
-
-        Search_Book.search_this(search_query, selected_category, selected_sorting);
-      };
-      onKeyPressHandler = event => {
-          if (event.key === 'Enter') {
-            this.search_book_string();
-          };
-      }
-    
-      inputChange = event => {
-        this.setState({ input: event.target.value})
-      };
-
-      takeCategoryValue = e => {
-        this.setState({selected_category: e});
-        console.log('Category ', this.selected_category);
-      };
-      takeSortingValue = e => {
-        this.setState({selected_sorting: e});
-        console.log('Sorting ', this.selected_sorting);
       };
 
       render() {
-        const { input, selected_category, selected_sorting } = this.state;
-
         return (
         <div id = "search-block">
           <h1>Search for Books</h1>
           <p>
-                <input type = "text" name = "search-text" value = {input} onKeyPress = {this.onKeyPressHandler} onChange = {this.inputChange}/>
-                <button onClick = {this.search_book_string}>Search</button>
+                <input type = "text" name = "search-text" value = {this.props.input} onKeyPress = {this.props.onKeyPressHandler} onChange = {this.props.inputChange}/>
+                <button onClick = {this.props.search_book_string}>Search</button>
           </p>
           <p>
             Categories
-            <select name = "search-categories" value = {selected_category} onChange = {e => this.takeCategoryValue(e.target.value)}>
+            <select name = "search-categories" value = {this.props.selected_category} onChange = {e => this.props.takeCategoryValue(e.target.value)}>
               <option defaultValue value="all">all</option>
               <option value = "art">art</option>
               <option value = "biography">biography</option>
@@ -66,7 +29,7 @@ class SearchInput extends React.Component {
               <option value = "poetry">poetry</option>
             </select>
             Sorting By
-            <select name = "search-sorting" value = {selected_sorting} onChange = {e => this.takeSortingValue(e.target.value)}>
+            <select name = "search-sorting" value = {this.props.selected_sorting} onChange = {e => this.props.takeSortingValue(e.target.value)}>
               <option defaultValue value = "revelance">revelance</option>
               <option value = "newest">newest</option>
             </select>
