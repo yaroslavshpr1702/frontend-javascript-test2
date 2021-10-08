@@ -4,7 +4,6 @@ import SearchInput from './components/SearchInput';
 import BooksView from './components/BooksView';
 import { observer } from 'mobx-react';
 
-//const App = observer(() => {
 class App extends React.Component {
   render() {
 
